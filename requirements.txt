@@ -1,9 +1,9 @@
 streamlit==1.45.1
-numpy==2.3.0
 pandas==2.2.3
+numpy==2.3.0
 scikit-learn==1.7.2
 plotly==6.1.2
-joblib==1.4.0
-matplotlib==3.9.0
-reportlab==4.0.4
-gunicorn==22.0.0
+joblib==1.5.1
+matplotlib==3.10.3
+reportlab
+gunicorn
