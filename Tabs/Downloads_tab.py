@@ -49,7 +49,7 @@ def show_downloads(prob_log,input_data):
         save_data(input_data.copy(),prob_log)
         st.success("Data saved successfully!")
 
-    if os.path.exists("Data/client_history.csv"):
+    if os.path.exists("Data/Client_history.csv"):
         st.subheader("Past Prediction History")
-        history = pd.read_csv("Data/client_history.csv")
+        history = pd.read_csv("Data/Client_history.csv")
         st.dataframe(history.tail(10))
