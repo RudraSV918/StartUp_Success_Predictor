@@ -4,6 +4,7 @@ from Dataset.preprocessing import DataPreprocessing
 from Models.Knn_model import KnnModel
 from Models.logistic_model import LogisticModel 
 from Models.RandomForest_model import RandomForestModel
+from Models.SVM_model import SVMModel
 
 
 def main():
@@ -21,6 +22,9 @@ def main():
 
     print("\n training Random Forest MODEL")
     rf_model = RandomForestModel.train_random_forest(X_train, y_train, X_test, y_test)
+
+    print("\n training SVM MODEL")
+    svm_model = SVMModel().train_svm(X_train, X_test, y_train, y_test)
 
 if __name__ == "__main__":
     main()

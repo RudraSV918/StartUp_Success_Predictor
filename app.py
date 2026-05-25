@@ -22,9 +22,10 @@ def load_models():
     log_model = pickle.load(open("Models/logistic_model.pkl","rb"))  ## rb means read binary 
     knn_model = pickle.load(open("Models/knn_model.pkl","rb"))
     rf_model = pickle.load(open("Models/random_forest_model.pkl","rb"))
-    return log_model,knn_model,rf_model
+    svm_model = pickle.load(open("Models/svm_model.pkl","rb"))
+    return log_model,knn_model,rf_model,svm_model
 
-log_model,knn_model,rf_model = load_models()
+log_model,knn_model,rf_model,svm_model = load_models()
 
 def load_data():
     return pd.read_csv("Data/startup_dataset.csv")
@@ -38,11 +39,13 @@ def load_metrics():
         knn_metrics = json.load(f)
     with open("Models/random_forest_metrics.json") as f:
         rf_metrics = json.load(f)
+    with open("Models/svm_metrics.json") as f:
+        svm_metrics = json.load(f)
 
-    return log_metrics,knn_metrics,rf_metrics
+    return log_metrics,knn_metrics,rf_metrics,svm_metrics
 
 
-log_metrics,knn_metrics,rf_metrics = load_metrics()
+log_metrics,knn_metrics,rf_metrics,svm_metrics = load_metrics()
 
 
 st.sidebar.header("Startup Parameters")
@@ -76,6 +79,7 @@ input_data = pd.DataFrame([{
 prob_log = log_model.predict_proba(input_data)[0][1] 
 prob_knn = knn_model.predict_proba(input_data)[0][1]
 prob_rf = rf_model.predict_proba(input_data)[0][1]
+prob_svm = svm_model.predict_proba(input_data)[0][1]
 ## login-Signup,Starts
 st.sidebar.title("USER AUTHENTICATION")
 
@@ -114,7 +118,7 @@ if st.session_state.logged_in: ##no login
     tab1,tab2,tab3 = st.tabs(["Prediction","Analytics","Downloads"])
 
     with tab1:
-        show_prediction(prob_log,prob_knn,prob_rf,log_model,log_metrics,knn_metrics,rf_metrics,[experience,team,funding,market,innovation,marketing,competition])
+        show_prediction(prob_log,prob_knn,prob_rf,prob_svm,log_model,log_metrics,knn_metrics,rf_metrics,svm_metrics,[experience,team,funding,market,innovation,marketing,competition])
 
     with tab2:
         show_analytics(df,knn_model,input_data)
